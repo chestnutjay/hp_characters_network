@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Dudley", "label": "Dudley", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Harry", "label": "Harry", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Vernon", "label": "Vernon", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Marge", "label": "Marge", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Albus", "label": "Albus", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "James", "label": "James", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Petunia", "label": "Petunia", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Rubeus", "label": "Rubeus", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Minerva", "label": "Minerva", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Cornelius", "label": "Cornelius", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Dedalus", "label": "Dedalus", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Griphook", "label": "Griphook", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Madam", "label": "Madam", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Hedwig", "label": "Hedwig", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Ginny", "label": "Ginny", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Ron", "label": "Ron", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Neville", "label": "Neville", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Lee", "label": "Lee", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "George", "label": "George", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Percy", "label": "Percy", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Nicolas", "label": "Nicolas", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Goyle", "label": "Goyle", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Draco", "label": "Draco", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Scabbers", "label": "Scabbers", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Hermione", "label": "Hermione", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Hannah", "label": "Hannah", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Susan", "label": "Susan", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Terry", "label": "Terry", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Seamus", "label": "Seamus", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Thomas", "label": "Thomas", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Nearly", "label": "Nearly", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Argus", "label": "Argus", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Fang", "label": "Fang", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Charlie", "label": "Charlie", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Parvati", "label": "Parvati", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Peeves", "label": "Peeves", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Oliver", "label": "Oliver", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Dean", "label": "Dean", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Angelina", "label": "Angelina", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Alicia", "label": "Alicia", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Katie", "label": "Katie", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Fred", "label": "Fred", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Bill", "label": "Bill", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Norbert", "label": "Norbert", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Ronan", "label": "Ronan", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Bane", "label": "Bane", "shape": "dot", "size": 10}, {"font": {"color": "white"}, "id": "Firenze", "label": "Firenze", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Dudley", "label": 1, "to": "Harry", "value": 638, "weight": 1}, {"from": "Dudley", "label": 1, "to": "Vernon", "value": 4, "weight": 1}, {"from": "Dudley", "label": 1, "to": "Marge", "value": 5, "weight": 1}, {"from": "Harry", "label": 1, "to": "Albus", "value": 7, "weight": 1}, {"from": "Harry", "label": 1, "to": "James", "value": 3, "weight": 1}, {"from": "Harry", "label": 1, "to": "Vernon", "value": 31, "weight": 1}, {"from": "Harry", "label": 1, "to": "Marge", "value": 17, "weight": 1}, {"from": "Harry", "label": 1, "to": "Petunia", "value": 14, "weight": 1}, {"from": "Harry", "label": 1, "to": "Rubeus", "value": 2, "weight": 1}, {"from": "Harry", "label": 1, "to": "Minerva", "value": 6, "weight": 1}, {"from": "Harry", "label": 1, "to": "Cornelius", "value": 4, "weight": 1}, {"from": "Harry", "label": 1, "to": "Dedalus", "value": 18, "weight": 1}, {"from": "Harry", "label": 1, "to": "Griphook", "value": 32, "weight": 1}, {"from": "Harry", "label": 1, "to": "Madam", "value": 5, "weight": 1}, {"from": "Harry", "label": 1, "to": "Hedwig", "value": 66, "weight": 1}, {"from": "Harry", "label": 1, "to": "Ginny", "value": 20, "weight": 1}, {"from": "Harry", "label": 1, "to": "Ron", "value": 2009, "weight": 1}, {"from": "Harry", "label": 1, "to": "Neville", "value": 421, "weight": 1}, {"from": "Harry", "label": 1, "to": "Lee", "value": 35, "weight": 1}, {"from": "Harry", "label": 1, "to": "George", "value": 53, "weight": 1}, {"from": "Harry", "label": 1, "to": "Percy", "value": 89, "weight": 1}, {"from": "Harry", "label": 1, "to": "Nicolas", "value": 45, "weight": 1}, {"from": "Harry", "label": 1, "to": "Goyle", "value": 54, "weight": 1}, {"from": "Harry", "label": 1, "to": "Draco", "value": 38, "weight": 1}, {"from": "Harry", "label": 1, "to": "Scabbers", "value": 10, "weight": 1}, {"from": "Harry", "label": 1, "to": "Hermione", "value": 46, "weight": 1}, {"from": "Harry", "label": 1, "to": "Hannah", "value": 12, "weight": 1}, {"from": "Harry", "label": 1, "to": "Susan", "value": 5, "weight": 1}, {"from": "Harry", "label": 1, "to": "Terry", "value": 4, "weight": 1}, {"from": "Harry", "label": 1, "to": "Seamus", "value": 82, "weight": 1}, {"from": "Harry", "label": 1, "to": "Thomas", "value": 2, "weight": 1}, {"from": "Harry", "label": 1, "to": "Nearly", "value": 4, "weight": 1}, {"from": "Harry", "label": 1, "to": "Argus", "value": 5, "weight": 1}, {"from": "Harry", "label": 1, "to": "Fang", "value": 40, "weight": 1}, {"from": "Harry", "label": 1, "to": "Charlie", "value": 20, "weight": 1}, {"from": "Harry", "label": 1, "to": "Parvati", "value": 7, "weight": 1}, {"from": "Harry", "label": 1, "to": "Peeves", "value": 15, "weight": 1}, {"from": "Harry", "label": 1, "to": "Oliver", "value": 18, "weight": 1}, {"from": "Harry", "label": 1, "to": "Dean", "value": 20, "weight": 1}, {"from": "Harry", "label": 1, "to": "Angelina", "value": 10, "weight": 1}, {"from": "Harry", "label": 1, "to": "Alicia", "value": 6, "weight": 1}, {"from": "Harry", "label": 1, "to": "Katie", "value": 4, "weight": 1}, {"from": "Harry", "label": 1, "to": "Fred", "value": 22, "weight": 1}, {"from": "Harry", "label": 1, "to": "Bill", "value": 5, "weight": 1}, {"from": "Harry", "label": 1, "to": "Norbert", "value": 66, "weight": 1}, {"from": "Harry", "label": 1, "to": "Ronan", "value": 35, "weight": 1}, {"from": "Harry", "label": 1, "to": "Bane", "value": 11, "weight": 1}, {"from": "Harry", "label": 1, "to": "Firenze", "value": 71, "weight": 1}, {"from": "Vernon", "label": 1, "to": "Marge", "value": 5, "weight": 1}, {"from": "Vernon", "label": 1, "to": "Petunia", "value": 4, "weight": 1}, {"from": "Hedwig", "label": 1, "to": "Ron", "value": 19, "weight": 1}, {"from": "Ginny", "label": 1, "to": "Ron", "value": 6, "weight": 1}, {"from": "Ron", "label": 1, "to": "George", "value": 19, "weight": 1}, {"from": "Ron", "label": 1, "to": "Bill", "value": 6, "weight": 1}, {"from": "Ron", "label": 1, "to": "Scabbers", "value": 8, "weight": 1}, {"from": "Ron", "label": 1, "to": "Neville", "value": 160, "weight": 1}, {"from": "Ron", "label": 1, "to": "Draco", "value": 11, "weight": 1}, {"from": "Ron", "label": 1, "to": "Goyle", "value": 44, "weight": 1}, {"from": "Ron", "label": 1, "to": "Hermione", "value": 28, "weight": 1}, {"from": "Ron", "label": 1, "to": "Dean", "value": 23, "weight": 1}, {"from": "Ron", "label": 1, "to": "Percy", "value": 9, "weight": 1}, {"from": "Ron", "label": 1, "to": "Seamus", "value": 13, "weight": 1}, {"from": "Ron", "label": 1, "to": "Fang", "value": 15, "weight": 1}, {"from": "Ron", "label": 1, "to": "Charlie", "value": 35, "weight": 1}, {"from": "Ron", "label": 1, "to": "Peeves", "value": 9, "weight": 1}, {"from": "Ron", "label": 1, "to": "Angelina", "value": 2, "weight": 1}, {"from": "Ron", "label": 1, "to": "Lee", "value": 12, "weight": 1}, {"from": "Ron", "label": 1, "to": "Nicolas", "value": 14, "weight": 1}, {"from": "Ron", "label": 1, "to": "Parvati", "value": 1, "weight": 1}, {"from": "Ron", "label": 1, "to": "Norbert", "value": 23, "weight": 1}, {"from": "Ron", "label": 1, "to": "Firenze", "value": 3, "weight": 1}, {"from": "Neville", "label": 1, "to": "Goyle", "value": 13, "weight": 1}, {"from": "Neville", "label": 1, "to": "Seamus", "value": 33, "weight": 1}, {"from": "Neville", "label": 1, "to": "Percy", "value": 9, "weight": 1}, {"from": "Neville", "label": 1, "to": "Hermione", "value": 11, "weight": 1}, {"from": "Neville", "label": 1, "to": "Draco", "value": 6, "weight": 1}, {"from": "Neville", "label": 1, "to": "Norbert", "value": 8, "weight": 1}, {"from": "Neville", "label": 1, "to": "Fang", "value": 10, "weight": 1}, {"from": "Neville", "label": 1, "to": "Peeves", "value": 5, "weight": 1}, {"from": "Lee", "label": 1, "to": "Charlie", "value": 4, "weight": 1}, {"from": "Lee", "label": 1, "to": "Angelina", "value": 3, "weight": 1}, {"from": "Lee", "label": 1, "to": "Alicia", "value": 5, "weight": 1}, {"from": "George", "label": 1, "to": "Charlie", "value": 4, "weight": 1}, {"from": "George", "label": 1, "to": "Fred", "value": 7, "weight": 1}, {"from": "George", "label": 1, "to": "Katie", "value": 5, "weight": 1}, {"from": "George", "label": 1, "to": "Angelina", "value": 5, "weight": 1}, {"from": "George", "label": 1, "to": "Percy", "value": 6, "weight": 1}, {"from": "Percy", "label": 1, "to": "Peeves", "value": 8, "weight": 1}, {"from": "Percy", "label": 1, "to": "Fred", "value": 9, "weight": 1}, {"from": "Bill", "label": 1, "to": "Charlie", "value": 17, "weight": 1}, {"from": "Charlie", "label": 1, "to": "Fred", "value": 4, "weight": 1}, {"from": "Charlie", "label": 1, "to": "Norbert", "value": 19, "weight": 1}, {"from": "Charlie", "label": 1, "to": "Fang", "value": 3, "weight": 1}, {"from": "Scabbers", "label": 1, "to": "Goyle", "value": 6, "weight": 1}, {"from": "Hannah", "label": 1, "to": "Susan", "value": 6, "weight": 1}, {"from": "Hannah", "label": 1, "to": "Terry", "value": 5, "weight": 1}, {"from": "Seamus", "label": 1, "to": "Nearly", "value": 5, "weight": 1}, {"from": "Seamus", "label": 1, "to": "Dean", "value": 12, "weight": 1}, {"from": "Thomas", "label": 1, "to": "Dean", "value": 6, "weight": 1}, {"from": "Fang", "label": 1, "to": "Norbert", "value": 3, "weight": 1}, {"from": "Fred", "label": 1, "to": "Angelina", "value": 3, "weight": 1}, {"from": "Ronan", "label": 1, "to": "Bane", "value": 1, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
